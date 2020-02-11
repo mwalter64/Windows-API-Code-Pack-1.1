@@ -61,11 +61,48 @@ namespace Microsoft.WindowsAPICodePack.Controls
     [Flags]
     public enum ExplorerBrowserNavigateOptions
     {
-        /// <summary>Always navigate, even if you are attempting to navigate to the current folder.</summary>
+        /// <summary>
+        /// Do not navigate further than the initial navigation.
+        /// </summary>
+        NavigateOnce = 0x00000001,
+
+        /// <summary>
+        /// Use the following standard panes: Commands Module pane, Navigation pane, Details pane, and Preview pane.
+        /// An implementer of IExplorerPaneVisibility can modify the components of the Commands Module that are shown.
+        /// For more information see, IExplorerPaneVisibility::GetPaneState. If EBO_SHOWFRAMES is not set, 
+        /// Explorer browser uses a single view object.
+        /// </summary>
+        ShowFrames = 0x00000002,
+
+        /// <summary>
+        /// Always navigate, even if you are attempting to navigate to the current folder.
+        /// </summary>
         AlwaysNavigate = 0x00000004,
 
-        /// <summary>Do not navigate further than the initial navigation.</summary>
-        NavigateOnce = 0x00000001,
+        /// <summary>
+        /// Do not update the travel log.
+        /// </summary>
+        NoTravelLog = 0x00000008,
+
+        /// <summary>
+        /// Do not use a wrapper window. This flag is used with legacy clients that need the browser parented directly on themselves.
+        /// </summary>
+        NoWrapperWindow = 0x00000010,
+
+        /// <summary>
+        /// Show WebView for sharepoint sites.
+        /// </summary>
+        HtmlSharePointView = 0x00000020,
+
+        /// <summary>
+        /// Introduced in Windows Vista. Do not draw a border around the browser window.
+        /// </summary>
+        NoBorder = 0x00000040,
+
+        /// <summary>
+        /// Introduced in Windows Vista. Do not persist the view state.
+        /// </summary>
+        NoPersistViewState = 0x00000080,
     }
 
     /// <summary>Indicates the viewing mode of the explorer browser</summary>
@@ -102,13 +139,35 @@ namespace Microsoft.WindowsAPICodePack.Controls
     /// <summary>Indicates the visibility state of an ExplorerBrowser pane</summary>
     public enum PaneVisibilityState
     {
-        /// <summary>Allow the explorer browser to determine if this pane is displayed.</summary>
-        DoNotCare,
+        /// <summary>
+        /// Do not make any modifications to the pane.
+        /// </summary>
+        DoNotCare = 0x0000,
 
-        /// <summary>Hide the pane</summary>
-        Hide,
+        /// <summary>
+        /// Set the default state of the pane to "on", but respect any user-modified persisted state.
+        /// </summary>
+        DefaultOn = 0x0001,
 
-        /// <summary>Show the pane</summary>
-        Show
+        /// <summary>
+        /// Set the default state of the pane to "off".
+        /// </summary>
+        DefaultOff = 0x0002,
+
+        /// <summary>
+        /// Unused
+        /// </summary>
+        StateMask = 0xFFFF,
+
+        /// <summary>
+        /// Ignore any persisted state from the user, but the user can still modify the state.
+        /// </summary>
+        InitialState = 0x00010000,
+
+        /// <summary>
+        /// Users cannot modify the state, that is, they do not have the ability to show or hide the given pane. This option implies EPS_INITIALSTATE.
+        /// </summary>
+        Force = 0x00020000,
+
     }
 }

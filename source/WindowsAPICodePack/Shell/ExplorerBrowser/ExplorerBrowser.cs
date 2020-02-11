@@ -244,7 +244,7 @@ namespace Microsoft.WindowsAPICodePack.Controls.WindowsForms
 #if LOG_UNKNOWN_PANES
                     System.Diagnostics.Debugger.Log( 4, "ExplorerBrowser", "unknown pane view state. id=" + explorerPane.ToString( ) );
 #endif
-                    peps = VisibilityToPaneState(PaneVisibilityState.Show);
+                    peps = VisibilityToPaneState(PaneVisibilityState.DefaultOn);
                     break;
             }
 
@@ -782,10 +782,10 @@ namespace Microsoft.WindowsAPICodePack.Controls.WindowsForms
                 case PaneVisibilityState.DoNotCare:
                     return ExplorerPaneState.DoNotCare;
 
-                case PaneVisibilityState.Hide:
+                case PaneVisibilityState.DefaultOff:
                     return ExplorerPaneState.DefaultOff | ExplorerPaneState.Force;
 
-                case PaneVisibilityState.Show:
+                case PaneVisibilityState.DefaultOn:
                     return ExplorerPaneState.DefaultOn | ExplorerPaneState.Force;
 
                 default:
